@@ -387,8 +387,8 @@ class MusicBrainz
     }
     
         protected function browseTrack(
-        Filters\FilterInterface $filter,
         $mbid,
+        Filters\FilterInterface $filter,
         array $includes,
         $limit = 25,
         $offset = null,
@@ -500,8 +500,8 @@ class MusicBrainz
     ) {
 
         return $this->browseTrack(
-                    new Filters\ReleaseFilter(array()),
                         $mbid,
+                        new Filters\ReleaseFilter(array()),
                         $includes,
                         $limit,
                         $offset,
