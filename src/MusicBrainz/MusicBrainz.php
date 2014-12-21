@@ -456,6 +456,7 @@ class MusicBrainz
      * @throws Exception
      */
     public function browseRelease(
+        $entity,
         $mbid,
         array $includes = array(),
         $limit = 25,
@@ -463,9 +464,13 @@ class MusicBrainz
         $releaseType = array(),
         $releaseStatus = array()
     ) {
+        if (!in_array($entity, array('artist', 'label', 'recording', 'release-group'))) {
+            throw new Exception('Invalid browse entity for release');
+        }
 
         return $this->browse(
                     new Filters\ReleaseFilter(array()),
+                        $entity,
                         $mbid,
                         $includes,
                         $limit,
