@@ -499,7 +499,7 @@ class MusicBrainz
         $releaseStatus = array()
     ) {
 
-        return $this->browse(
+        return $this->browseTrack(
                     new Filters\ReleaseFilter(array()),
                         $mbid,
                         $includes,
