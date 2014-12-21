@@ -1,15 +1,15 @@
 {
-    "name": "mikealmond/musicbrainz",
+    "name": "alexanderahlsen/musicbrainz",
     "type": "library",
     "description": "A PHP library for accessing the MusicBrainz API",
     "keywords": ["musicbrainz", "library", "php", "api"],
-    "homepage": "https://github.com/mikealmond/musicbrainz",
+    "homepage": "https://github.com/alexanderahlsen/musicbrainz",
     "license": "MIT",
     "authors": [
         {
-            "name": "Mike Almond",
-            "email": "mike.almond@gmail.com",
-            "homepage": "http://mikealmond.com",
+            "name": "Alexander Ahlsen",
+            "email": "alexander.ahlsen@me.com",
+            "homepage": "http://thegeek.no",
             "role": "Developer"
         }
     ],
