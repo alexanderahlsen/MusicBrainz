@@ -463,9 +463,6 @@ class MusicBrainz
         $releaseType = array(),
         $releaseStatus = array()
     ) {
-        if (!in_array(array('artist', '', 'label', 'recording', 'release-group'))) {
-            throw new Exception('Invalid browse entity for release');
-        }
 
         return $this->browse(
                     new Filters\ReleaseFilter(array()),
