@@ -469,7 +469,6 @@ class MusicBrainz
 
         return $this->browse(
                     new Filters\ReleaseFilter(array()),
-                        $entity,
                         $mbid,
                         $includes,
                         $limit,
