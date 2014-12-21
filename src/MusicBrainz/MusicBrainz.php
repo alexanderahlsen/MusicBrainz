@@ -385,6 +385,41 @@ class MusicBrainz
 
         return $response;
     }
+    
+        protected function browseTrack(
+        Filters\FilterInterface $filter,
+        $mbid,
+        array $includes,
+        $limit = 25,
+        $offset = null,
+        $releaseType = array(),
+        $releaseStatus = array()
+    ) {
+        if (!$this->isValidMBID($mbid)) {
+            throw new Exception('Invalid Music Brainz ID');
+        }
+
+        if ($limit > 100) {
+            throw new Exception('Limit can only be between 1 and 100');
+        }
+
+        $this->validateInclude($includes, self::$validBrowseIncludes[$filter->getEntity()]);
+
+        $authRequired = $this->isAuthRequired($filter->getEntity(), $includes);
+
+        $params = $this->getBrowseFilterParams($filter->getEntity(), $includes, $releaseType, $releaseStatus);
+        $params += array(
+            $mbid,
+            'inc'    => implode('+', $includes),
+            'limit'  => $limit,
+            'offset' => $offset,
+            'fmt'    => 'json'
+        );
+
+        $response = $this->adapter->call($filter->getEntity() . '/', $params, $this->getHttpOptions(), $authRequired);
+
+        return $response;
+    }
 
     /**
      * @param       $entity
@@ -456,7 +491,6 @@ class MusicBrainz
      * @throws Exception
      */
     public function browseRelease(
-        $entity,
         $mbid,
         array $includes = array(),
         $limit = 25,
@@ -464,13 +498,9 @@ class MusicBrainz
         $releaseType = array(),
         $releaseStatus = array()
     ) {
-        if (!in_array($entity, array('artist', 'label', 'recording', 'release-group'))) {
-            throw new Exception('Invalid browse entity for release');
-        }
 
         return $this->browse(
                     new Filters\ReleaseFilter(array()),
-                        $entity,
                         $mbid,
                         $includes,
                         $limit,
