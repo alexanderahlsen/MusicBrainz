@@ -388,7 +388,6 @@ class MusicBrainz
     
         protected function browseTrack(
         $mbid,
-        Filters\FilterInterface $filter,
         array $includes,
         $limit = 25,
         $offset = null,
@@ -403,11 +402,11 @@ class MusicBrainz
             throw new Exception('Limit can only be between 1 and 100');
         }
 
-        $this->validateInclude($includes, self::$validBrowseIncludes[$filter->getEntity()]);
+        $this->validateInclude($includes);
 
-        $authRequired = $this->isAuthRequired($filter->getEntity(), $includes);
+        $authRequired = $this->isAuthRequired($includes);
 
-        $params = $this->getBrowseFilterParams($filter->getEntity(), $includes, $releaseType, $releaseStatus);
+        $params = $this->getBrowseFilterParams($includes, $releaseType, $releaseStatus);
         $params += array(
             $mbid,
             'inc'    => implode('+', $includes),
@@ -416,7 +415,7 @@ class MusicBrainz
             'fmt'    => 'json'
         );
 
-        $response = $this->adapter->call($filter->getEntity() . '/', $params, $this->getHttpOptions(), $authRequired);
+        $response = $this->adapter->call($params, $this->getHttpOptions(), $authRequired);
 
         return $response;
     }
