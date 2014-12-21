@@ -52,6 +52,14 @@ class ReleaseGroup
     {
         return $this->data['title'];
     }
+    
+    /**
+     * @return string
+     */
+    public function getArtist()
+    {
+        return $this->data['artist-credit']['artist']['name'];
+    }
 
     /**
      * @return mixed
