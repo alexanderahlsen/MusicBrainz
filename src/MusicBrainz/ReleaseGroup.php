@@ -61,6 +61,12 @@ class ReleaseGroup
         return $this->data['artist-credit'][0]['artist']['name'];
         
     }
+    
+    public function getReleasesID()
+    {
+        return $this->data['releases'][0]['id'];
+        
+    }
 
     /**
      * @return mixed
