@@ -56,6 +56,12 @@ class ReleaseGroup
     /**
      * @return string
      */
+    public function getType()
+    {
+        return $this->data['primary-type'];
+        
+    }
+    
     public function getArtist()
     {
         return $this->data['artist-credit'][0]['artist']['name'];
